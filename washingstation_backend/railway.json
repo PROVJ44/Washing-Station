@@ -1,8 +1,12 @@
 {
   "build": {
-    "builder": "nixpacks"
+    "builder": "nixpacks",
+    "nixpacksPlan": {
+      "packages": ["openjdk-21", "maven"]
+    }
   },
   "deploy": {
-    "startCommand": "java -jar target/washingstation_backend-0.0.1-SNAPSHOT.jar"
+    "startCommand": "java -jar target/washingstation_backend.jar"
   }
 }
+
