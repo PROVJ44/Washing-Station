@@ -3013,32 +3013,49 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
               className={fc}
             />
           </div>
-          </div>
+
           <div>
-          <label className="text-xs font-medium text-gray-600 mb-1.5 block">
-            Password
+            <label className="text-xs font-medium text-gray-600 mb-1.5 block">
+              Password
+            </label>
+
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="••••••••"
+                onKeyDown={e => e.key === "Enter" && handleLogin()}
+                className={`${fc} pr-12`}
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </button>
+            </div>
+          </div>
+
+          <label className="flex items-center gap-2.5 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={remember}
+              onChange={e => setRemember(e.target.checked)}
+              className="accent-blue-600 w-4 h-4"
+            />
+            <span className="text-sm text-gray-600">Remember me</span>
           </label>
 
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              placeholder="••••••••"
-              onKeyDown={e => e.key === "Enter" && handleLogin()}
-              className={`${fc} pr-12`}
-            />
-
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-            >
-              {showPassword ? "🙈" : "👁️"}
-            </button>
-          </div>
+          <button
+            onClick={handleLogin}
+            className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold py-3.5 rounded-xl transition-all shadow-sm text-sm"
+          >
+            Login to Dashboard
+          </button>
         </div>
-
         {/* Dedication */}
         <div className="mt-7 pt-5 border-t border-blue-100">
           <p className="text-[11px] text-gray-400 text-center leading-relaxed">
