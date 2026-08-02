@@ -3,6 +3,7 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { Eye, EyeOff } from "lucide-react";
 import {
   BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -2946,6 +2947,7 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [remember, setRemember] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   async function handleLogin() {
     try {
       const response = await fetch("https://washing-station-production.up.railway.app/api/auth/login", {
@@ -2962,7 +2964,14 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
       const result = await response.text();
 
       if (result === "SUCCESS") {
-        localStorage.setItem("loggedUser", username);
+
+        if (remember) {
+          localStorage.setItem("loggedUser", username);
+          localStorage.setItem("isLoggedIn", "true");
+        } else {
+          sessionStorage.setItem("loggedUser", username);
+          sessionStorage.setItem("isLoggedIn", "true");
+        }
         onLogin();
       } else {
         alert("Invalid username or password");
@@ -2993,8 +3002,24 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
         <div className="space-y-4">
           <div>
             <label className="text-xs font-medium text-gray-600 mb-1.5 block">Username</label>
-            <input type="text" value={username} onChange={e => setUsername(e.target.value)}
-              placeholder="admin" onKeyDown={e => e.key === 'Enter' && handleLogin()} className={fc} />
+           <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="••••••••"
+                onKeyDown={e => e.key === "Enter" && handleLogin()}
+                className={`${fc} pr-12`}
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
           <div>
             <label className="text-xs font-medium text-gray-600 mb-1.5 block">Password</label>
@@ -3043,7 +3068,13 @@ const PAGE_TITLES: Record<string, string> = {
 
 export default function App() {
 
-  const [page,       setPage]       = useState<Page>('login')
+  const [page, setPage] = useState<Page>(() => {
+  const logged =
+    localStorage.getItem("isLoggedIn") ||
+    sessionStorage.getItem("isLoggedIn");
+
+  return logged ? "dashboard" : "login";
+});
   const [collapsed,  setCollapsed]  = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [selWorker,  setSelWorker]  = useState<Worker | null>(null)
@@ -3174,7 +3205,15 @@ const netProfit = totalEarnings - totalExpenses;
         current={page} onNav={setPage}
         collapsed={collapsed} onToggle={() => setCollapsed(v => !v)}
         mobileOpen={mobileOpen} onMobileClose={() => setMobileOpen(false)}
-        onLogout={() => setPage('login')}
+        onLogout={() => {
+          localStorage.removeItem("loggedUser");
+          localStorage.removeItem("isLoggedIn");
+
+          sessionStorage.removeItem("loggedUser");
+          sessionStorage.removeItem("isLoggedIn");
+
+          setPage("login");
+        }}
       />
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <TopBar title={PAGE_TITLES[page] || 'Wash Station'} onMenuClick={() => setMobileOpen(v => !v)} />
