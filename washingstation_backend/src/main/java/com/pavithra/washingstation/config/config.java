@@ -16,7 +16,7 @@ public class config {
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:8443")
+                        .allowedOrigins("http://localhost:5173", "http://localhost:8443", "https://washing-station-5a1g.vercel.app")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
 

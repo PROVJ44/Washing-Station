@@ -10,7 +10,7 @@ import com.pavithra.washingstation.service.WorkerService;
 import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/api/workers")
-@CrossOrigin(origins = "http://localhost:8443")
+@CrossOrigin(origins = {"http://localhost:8443", "https://washing-station-5a1g.vercel.app"})
 public class WorkerController {
 
     @Autowired

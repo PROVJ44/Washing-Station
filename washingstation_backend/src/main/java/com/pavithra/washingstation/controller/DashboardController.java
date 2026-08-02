@@ -16,7 +16,7 @@ import com.pavithra.washingstation.repository.WorkerRepository;
 
 @RestController
 @RequestMapping("/api/dashboard")
-@CrossOrigin(origins = "http://localhost:8443")
+@CrossOrigin(origins = {"http://localhost:8443", "https://washing-station-5a1g.vercel.app"})
 public class DashboardController {
 
     @Autowired

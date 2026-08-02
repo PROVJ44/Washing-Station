@@ -10,7 +10,7 @@ import com.pavithra.washingstation.service.SalarySettlementService;
 
 @RestController
 @RequestMapping("/api/salary-settlements")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "https://washing-station-5a1g.vercel.app"})
 public class SalarySettlementController {
 
     @Autowired
