@@ -1,12 +1,9 @@
 {
   "build": {
-    "builder": "nixpacks",
-    "nixpacksPlan": {
-      "packages": ["openjdk-21", "maven"]
-    }
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "Dockerfile"
   },
   "deploy": {
-    "startCommand": "java -jar target/washingstation_backend.jar"
+    "startCommand": "java -jar app.jar"
   }
 }
-
