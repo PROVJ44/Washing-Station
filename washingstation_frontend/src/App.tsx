@@ -2946,7 +2946,6 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
   const [password, setPassword] = useState('')
   const [remember, setRemember] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
   async function handleLogin() {
     try {
       const response = await fetch("https://washing-station-production.up.railway.app/api/auth/login", {
