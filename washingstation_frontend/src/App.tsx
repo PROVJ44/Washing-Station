@@ -3,7 +3,6 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
 import {
   BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -2947,6 +2946,7 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
   const [password, setPassword] = useState('')
   const [remember, setRemember] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
   async function handleLogin() {
     try {
       const response = await fetch("https://washing-station-production.up.railway.app/api/auth/login", {
