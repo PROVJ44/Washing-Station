@@ -3000,39 +3000,43 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
         {/* Form */}
         <div className="space-y-4">
           <div>
-            <label className="text-xs font-medium text-gray-600 mb-1.5 block">Username</label>
-           <div className="relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                placeholder="••••••••"
-                onKeyDown={e => e.key === "Enter" && handleLogin()}
-                className={`${fc} pr-12`}
-              />
+            <label className="text-xs font-medium text-gray-600 mb-1.5 block">
+              Username
+            </label>
 
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
+            <input
+              type="text"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              placeholder="admin"
+              onKeyDown={e => e.key === "Enter" && handleLogin()}
+              className={fc}
+            />
+          </div>
           </div>
           <div>
-            <label className="text-xs font-medium text-gray-600 mb-1.5 block">Password</label>
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)}
-              placeholder="••••••••" onKeyDown={e => e.key === 'Enter' && handleLogin()} className={fc} />
-          </div>
-          <label className="flex items-center gap-2.5 cursor-pointer">
-            <input type="checkbox" checked={remember} onChange={e => setRemember(e.target.checked)} className="accent-blue-600 w-4 h-4" />
-            <span className="text-sm text-gray-600">Remember me</span>
+          <label className="text-xs font-medium text-gray-600 mb-1.5 block">
+            Password
           </label>
-          <button onClick={handleLogin}
-            className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold py-3.5 rounded-xl transition-all shadow-sm text-sm">
-            Login to Dashboard
-          </button>
+
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="••••••••"
+              onKeyDown={e => e.key === "Enter" && handleLogin()}
+              className={`${fc} pr-12`}
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </button>
+          </div>
         </div>
 
         {/* Dedication */}
