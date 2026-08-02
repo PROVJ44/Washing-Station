@@ -465,8 +465,8 @@ function DailyEarningsPage({ earnings, setEarnings }: { earnings: Earning[]; set
   try {
     const response = await fetch(
   editingId
-    ? `http://localhost:8080/api/earnings/${editingId}`
-    : "http://localhost:8080/api/earnings",
+    ? `https://washing-station-production.up.railway.app/api/earnings/${editingId}`
+    : "https://washing-station-production.up.railway.app/api/earnings",
   {
     method: editingId ? "PUT" : "POST",
     headers: {
@@ -657,7 +657,7 @@ setEditingId(null);
       onClick={async () => {
         if (!confirm("Delete this earning?")) return;
 
-        await fetch(`http://localhost:8080/api/earnings/${e.id}`, {
+        await fetch(`https://washing-station-production.up.railway.app/api/earnings/${e.id}`, {
           method: "DELETE",
         });
 
@@ -700,7 +700,7 @@ function PendingPaymentsPage({ earnings, setEarnings }: { earnings: Earning[]; s
 
   try {
     const response = await fetch(
-      `http://localhost:8080/api/earnings/${payModal.id}`,
+      `https://washing-station-production.up.railway.app/api/earnings/${payModal.id}`,
       {
         method: "PUT",
         headers: {
@@ -919,7 +919,7 @@ function WorkersPage({ workers, setWorkers, transactions, onSelectWorker }: Work
   if (!form.name || !form.salary) return;
 
   try {
-    const response = await fetch("http://localhost:8080/api/workers", {
+    const response = await fetch("https://washing-station-production.up.railway.app/api/workers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -988,7 +988,7 @@ function WorkersPage({ workers, setWorkers, transactions, onSelectWorker }: Work
 
   try {
     const response = await fetch(
-      `http://localhost:8080/api/workers/${id}`,
+      `https://washing-station-production.up.railway.app/api/workers/${id}`,
       {
         method: "PUT",
         headers: {
@@ -1032,7 +1032,7 @@ async function removeWorker(id: number) {
 
   try {
     const response = await fetch(
-      `http://localhost:8080/api/workers/${id}`,
+      `https://washing-station-production.up.railway.app/api/workers/${id}`,
       {
         method: "DELETE",
       }
@@ -1185,7 +1185,7 @@ async function removeWorker(id: number) {
 function WorkerDetailPage({ worker, transactions, onBack }: { worker: Worker; transactions: WTransaction[]; onBack: () => void }) {
   const [txs, setTxs] = useState<WTransaction[]>([]);
   useEffect(() => {
-    fetch(`http://localhost:8080/api/transactions/worker/${worker.id}`)
+    fetch(`https://washing-station-production.up.railway.app/api/transactions/worker/${worker.id}`)
         .then(res => res.json())
         .then(data => {
 
@@ -1301,7 +1301,7 @@ function AddTransactionPage({ workers, setTransactions }: AddTxProps) {
   if (!worker) return;
 
   try {
-    const response = await fetch("http://localhost:8080/api/transactions", {
+    const response = await fetch("https://washing-station-production.up.railway.app/api/transactions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1434,7 +1434,7 @@ const [year, setYear] = useState(today.getFullYear());
 
   try {
     const response = await fetch(
-      `http://localhost:8080/api/salary-settlements/${selWorker.id}`,
+      `https://washing-station-production.up.railway.app/api/salary-settlements/${selWorker.id}`,
       {
         method: "POST",
       }
@@ -1907,7 +1907,7 @@ async function deleteExpense(id: number) {
   if (!confirmDelete) return;
 
   try {
-    const res = await fetch(`http://localhost:8080/api/expenses/${id}`, {
+    const res = await fetch(`https://washing-station-production.up.railway.app/api/expenses/${id}`, {
       method: "DELETE",
     });
 
@@ -1950,7 +1950,7 @@ async function addExpense() {
     let res;
 
     if (editingId !== null) {
-      res = await fetch(`http://localhost:8080/api/expenses/${editingId}`, {
+      res = await fetch(`https://washing-station-production.up.railway.app/api/expenses/${editingId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -1958,7 +1958,7 @@ async function addExpense() {
         body: JSON.stringify(expense),
       });
     } else {
-      res = await fetch("http://localhost:8080/api/expenses", {
+      res = await fetch("https://washing-station-production.up.railway.app/api/expenses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -2901,7 +2901,7 @@ function SettingsPage({
           onClick={async () => {
           try {
             const response = await fetch(
-              "http://localhost:8080/api/auth/change-password",
+              "https://washing-station-production.up.railway.app/api/auth/change-password",
               {
                 method: "PUT",
                 headers: {
@@ -2948,7 +2948,7 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
   const [remember, setRemember] = useState(false)
   async function handleLogin() {
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+      const response = await fetch("https://washing-station-production.up.railway.app/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -3054,7 +3054,7 @@ export default function App() {
   const [workers, setWorkers] = useState<Worker[]>([])
   const [transactions, setTransactions] = useState<WTransaction[]>([])
   useEffect(() => {
-  fetch("http://localhost:8080/api/workers")
+  fetch("https://washing-station-production.up.railway.app/api/workers")
     .then(res => res.json())
     .then(data => {
       const COLORS = [
@@ -3082,7 +3082,7 @@ export default function App() {
     .catch(err => console.error(err));
 }, []);
 useEffect(() => {
-  fetch("http://localhost:8080/api/earnings")
+  fetch("https://washing-station-production.up.railway.app/api/earnings")
     .then(res => res.json())
     .then(data => {
       setEarnings(data);
@@ -3090,7 +3090,7 @@ useEffect(() => {
     .catch(err => console.error(err));
 }, []);
 useEffect(() => {
-  fetch("http://localhost:8080/api/dashboard")
+  fetch("https://washing-station-production.up.railway.app/api/dashboard")
     .then((res) => res.json())
     .then((data) => {
       setDashboard(data);
@@ -3099,14 +3099,14 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  fetch("http://localhost:8080/api/expenses")
+  fetch("https://washing-station-production.up.railway.app/api/expenses")
     .then(res => res.json())
     .then(data => setExpenses(data))
     .catch(err => console.error(err));
 }, []);
 
 const loadTransactions = () => {
-  fetch("http://localhost:8080/api/transactions")
+  fetch("https://washing-station-production.up.railway.app/api/transactions")
     .then(res => res.json())
     .then(data => {
       const txs = data.map((tx: any) => ({
@@ -3129,7 +3129,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  fetch("http://localhost:8080/api/salary-settlements")
+  fetch("https://washing-station-production.up.railway.app/api/salary-settlements")
     .then(res => res.json())
     .then(data => {
       const mapped = data.map((s: any) => ({
